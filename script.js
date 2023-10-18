@@ -17,10 +17,10 @@ function updateDom(data) {
   for (const d of data) {
     str += "<div>";
     str += `<h2>id : ${d.id}</h2>`;
-    str += `<h2>name : ${d.data().name}</h2>`;
-    str += `<h2>email : ${d.data().email}</h2>`;
-    str += `<h2>imgUrl : ${d.data().imgUrl}</h2>`;
-    str += `<h2>msg : ${d.data().msg}</h2>`;
+    str += `<h3>name : ${d.data().name}</h2>`;
+    str += `<h3>email : ${d.data().email}</h2>`;
+    str += `<h3>imgUrl : ${d.data().imgUrl}</h2>`;
+    str += `<h3>msg : ${d.data().msg}</h2>`;
     str += "</div>";
   }
   document.getElementById("print").innerHTML = str;
