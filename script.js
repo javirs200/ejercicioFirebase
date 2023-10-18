@@ -16,6 +16,7 @@ function updateDom(data) {
   let str = "";
   for (const d of data) {
     str += "<div>";
+    str += `<h2>id : ${d.id}</h2>`;
     str += `<h2>name : ${d.data().name}</h2>`;
     str += `<h2>email : ${d.data().email}</h2>`;
     str += `<h2>imgUrl : ${d.data().imgUrl}</h2>`;
@@ -27,20 +28,20 @@ function updateDom(data) {
 
 function createDocumentDB(user) {
   db.collection("Usuarios")
-        .add(user)
-        .then((docRef) => {
-            console.log("Document written with ID: ", docRef.id)
-        })
-        .catch((error) => console.error("Error adding document: ", error));
+    .add(user)
+    .then((docRef) => {
+      console.log("Document written with ID: ", docRef.id)
+    })
+    .catch((error) => console.error("Error adding document: ", error));
 }
 
 function readAll() {
   db.collection("Usuarios")
-        .get()
-        .then((querySnapshot) => {
-              updateDom(querySnapshot.docs);
-        })
-        .catch(() => console.log('Error reading documents'));
+    .get()
+    .then((querySnapshot) => {
+      updateDom(querySnapshot.docs);
+    })
+    .catch(() => console.log('Error reading documents'));
 }
 
 function storageData(user) {
@@ -48,13 +49,33 @@ function storageData(user) {
 }
 
 //Borrar un usuario
-const deletePicture = () => {
-  const id = prompt('Introduce el ID a borrar');
+const deleteUser = (id) => {
+  console.log(id);
   db.collection('Usuarios').doc(id).delete().then(() => {
-    alert(`Documento ${id} ha sido borrado`);
+    alert(`Usuario ${id} ha sido borrado`);
+    readAll();
   })
     .catch(() => console.log('Error borrando documento'));
 };
+
+//Borrar todos los usuarios
+const deleteAllUsers = () => {
+  //primero get ids de todos 
+  db.collection("Usuarios")
+  .get()
+  .then((querySnapshot) => {
+    for (const doc of querySnapshot.docs) {
+      db.collection('Usuarios').doc(doc.id).delete()
+    }
+    readAll();
+  })
+  .catch(() => console.log('Error reading documents'));
+  //luego borrar en for
+};
+
+document.getElementById('deleteAll').addEventListener('click', () => {
+  deleteAllUsers();
+});
 
 document.getElementById("form").addEventListener("submit", function (event) {
   event.preventDefault();
@@ -71,23 +92,12 @@ document.getElementById("form").addEventListener("submit", function (event) {
   readAll();
 });
 
-/*document
-  .getElementById("deleteUser")
+document.getElementById("deleteUser")
   .addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const deleteUser = event.target.nameDelete.value;
+    const deleteid = event.target.nameDelete.value;
 
-    let data = JSON.parse(localStorage.getItem("users"));
+    deleteUser(deleteid);
 
-    data = data.filter((el) => el.name !== deleteUser);
-
-    localStorage.setItem("users", JSON.stringify(data));
-
-    updateDom(data)
-  });
-
-document.getElementById("delete").addEventListener("click", function () {
-  localStorage.setItem("users", JSON.stringify([]));
-  updateDom([])
-});*/
+});
