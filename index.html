@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <h1>Formulario</h1>
+        <br>
+        <form action="" id="form">
+            <label for="name">Nombre:</label>
+            <input type="text" name="name" id="name" placeholder="Nombre">
+            <br>
+            <br>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" placeholder="example@example.com">
+            <br>
+            <br>
+            <label for="msg">Mensaje:</label>
+            <input type="textarea" name="msg" id="msg" placeholder="Introduce tu mensaje aquí.">
+            <br>
+            <br>
+            <label for="imgUrl">URL de imágen:</label>
+            <input type="text" name="imgUrl" id="imgUrl" placeholder="https://example.com">
+            <br>
+            <br>
+            <input type="submit" id="submit" value="Enviar">
+        </form>
+        <br>
+        <button id="delete">Borrar un usuario</button>
+        <button id="deleteAll">Borrar todo</button>
+        <br>
+        <br>
+        <form action="" id="deleteUser">
+            <h2>Borrar usuario:</h2>
+            <label for="nameDelete">Nombre:</label>
+            <input type="text" name="nameDelete" id="nameDelete" placeholder="Nombre">
+            <input type="submit" id="submitDelete">
+        </form>
+        <br>
+        <section>
+            <h2>Tus datos:</h2>
+            <article id="print">
+
+            </article>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
