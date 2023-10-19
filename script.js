@@ -101,3 +101,7 @@ document.getElementById("deleteUser")
     deleteUser(deleteid);
 
 });
+
+document.getElementById("showAll").addEventListener("click",()=>{
+  readAll()
+})
